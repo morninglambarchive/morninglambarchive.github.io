@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>morning lamb sounds</title>
+
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+
+
+ <style>
+   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+   body {
+     background: #FFF;
+     color: #FFF;
+     font-family: 'Space Grotesk', sans-serif;
+     min-height: 100vh;
+     cursor: default;
+   }
+
+
+   /* ── scrollable canvas ─── */
+   .canvas {
+     position: relative;
+     width: 100vw;
+     /* tall enough to scatter things and scroll through them.
+        increase this as you add more tracks */
+     min-height: 300vh;
+     padding-bottom: 10vh;
+   }
+
+
+   /* ── Top photo ─────────────────────────────────── */
+   .top-photo {
+     position: absolute;
+     top: 1.5%;
+     left: 50%;
+     transform: translateX(-50%);
+     width: 300px;
+     height: auto;
+   }
+
+
+   /* ── Page title ────────────────────────────────── */
+   .page-title {
+     position: absolute;
+     top: 5%;
+     left: 6%;
+     font-weight: 200;
+     font-size: clamp(2.5rem, 6vw, 5rem);
+     color: #000000;
+
+
+   }
+
+
+   /* ── Track blocks ──────────────────────────────── */
+   .track {
+     position: absolute;
+     max-width: 320px;
+   }
+
+
+   .track-title {
+     font-weight: 300;
+     font-size: 0.85rem;
+     letter-spacing: 0.06em;
+     color: #777;
+     margin-bottom: 0.4rem;
+     text-shadow: 0 0 15px rgba(255,255,255,0.08);
+   }
+
+
+   /* style the native audio player to be minimal and light */
+   .track audio {
+     width: 260px;
+     height: 36px;
+     opacity: 0.6;
+     transition: opacity 0.3s ease;
+     filter: invert(1) brightness(0.7) contrast(0.85);
+   }
+
+
+   .track audio:hover {
+     opacity: 0.9;
+   }
+
+
+   /* ── Scatter positions for each track ──────────── */
+   /*    Adjust top / left / rotation as you add more.
+         top is in vh so scrolling works naturally.      */
+
+
+   .track-1 { top: 40vh;  left: 8%; }
+   .track-2 { top: 53vh;  left: 54%;  }
+   .track-3 { top: 64vh;  left: 32%; }
+   .track-4 { top: 90vh;  left: 15%; }
+   .track-5 { top: 95vh; left: 70%; }
+   .track-6 { top: 142vh; left: 5%;  }
+   .track-7 { top: 168vh; left: 48%; }
+   .track-8 { top: 194vh; left: 12%; }
+   /* keep adding: .track-9, .track-10, etc.
+      bump top by ~26vh each time, alternate left */
+
+
+   /* ── Nav links (scattered, small) ──────────────── */
+   .nav-word {
+     position: absolute;
+     font-family: 'Space Grotesk', sans-serif;
+     font-weight: 300;
+     font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+     letter-spacing: 0.08em;
+     color: #555;
+     text-decoration: none;
+     transition: color 0.4s ease, text-shadow 0.4s ease;
+     white-space: nowrap;
+   }
+
+
+   .nav-word:hover {
+     color: #ccc;
+     text-shadow: 0 0 20px rgba(255,255,255,0.12);
+   }
+
+
+   .nav-home {
+     position: fixed;
+     top: 4%;
+     right: 5%;
+   }
+
+
+   /* ── Subtle drift ──────────────────────────────── */
+   @keyframes drift {
+     0%, 100% { transform: translate(0, 0); }
+     50%      { transform: translate(var(--dx, 0), var(--dy, 0)); }
+   }
+
+
+   .page-title {
+     animation: drift 20s ease-in-out infinite;
+     --dx: 4px; --dy: 2px;
+   }
+
+
+   /* ── Mobile ────────────────────────────────────── */
+ @media (max-width: 640px) {
+
+
+   .canvas {
+     min-height: auto;
+     display: flex;
+     flex-direction: column;
+     padding: 3vh 6% 10vh;
+   }
+
+
+   .top-photo {
+     position: relative;
+     top: 1.5%;
+     left: 50%;
+     transform: translateX(-50%);
+     width: 180px;
+     margin-bottom: 2rem;
+   }
+
+
+   .page-title {
+     position: relative;
+     top: auto;
+     left: auto;
+     font-size: 2.2rem;
+     text-align: center;
+     margin-bottom: 2rem;
+     animation: none;
+   }
+
+
+   .track {
+     position: static;
+     max-width: 100%;
+     margin-bottom: 2rem;
+   }
+
+
+   .track audio { width: 100%; }
+
+
+   .nav-home {
+     top: auto;
+     bottom: 3%;
+     right: 5%;
+     position: fixed;
+   }
+
+
+   .nav-word { font-size: 0.75rem; }
+ }
+ </style>
+</head>
+
+
+<body>
+
+
+ <div class="canvas">
+
+
+   <!-- Photo -->
+   <img src="./images/lambeye.jpg" alt="" class="top-photo">
+
+
+   <!-- Page title -->
+   <span class="page-title">sound</span>
+
+
+   <!-- Back to home -->
+   <a href="index.html" class="nav-word nav-home">home</a>
+
+
+   <!--
+     ══ TRACKS ══
+     for future reference to add a track:
+     1. put your file in audio directory
+     2. copy one of the track blocks
+     3. change to the next number (track-9, etc.)
+     4. update the src and title
+     5. add a matching .track-9 position in the css
+   -->
+
+
+   <div class="track track-1">
+     <div class="track-title"> </div>
+     <audio controls controlslist="nodownload" preload="none">
+       <source src="./audio/midaugustlullaby.wav" type="audio/wav">
+     </audio>
+   </div>
+
+
+
+   <div class="track track-3">
+     <div class="track-title"> </div>
+     <audio controls controlslist="nodownload" preload="none">
+       <source src="./audio/tmy.wav" type="audio/wav">
+     </audio>
+   </div>
+
+
+   <div class="track track-4">
+     <div class="track-title"> </div>
+     <audio controls controlslist="nodownload" preload="none">
+       <source src="./audio/fufufun.wav" type="audio/wav">
+     </audio>
+   </div>
+
+
+   <div class="track track-5">
+     <div class="track-title"> </div>
+     <audio controls controlslist="nodownload" preload="none">
+       <source src="./audio/boredom.m4a" type="audio/mp4">
+     </audio>
+   </div>
+
+
+
+
+ </div>
+
+
+</body>
+</html>
+
