@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>media gallery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f5f0eb;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #2c2c2c;
+      min-height: 100vh;
+      padding: 60px 80px;
+    }
+
+    .container {
+      max-width: 600px;
+    }
+
+    .back-link {
+      font-size: 10px;
+      font-weight: 200;
+      color: #999;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #2c2c2c;
+    }
+
+    .page-title {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      text-transform: lowercase;
+      margin-top: 40px;
+      margin-bottom: 50px;
+    }
+
+    .media-item {
+      margin-bottom: 45px;
+    }
+
+    .media-title {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    /* Audio styling */
+    audio {
+      width: 100%;
+      height: 32px;
+      opacity: 0.7;
+    }
+
+    audio::-webkit-media-controls-panel {
+      background-color: #ebe6e0;
+    }
+
+    /* Image styling */
+    .media-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+
+    /* Video Embed Container (16:9 Aspect Ratio) */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    video {
+     width: 100%;
+  height: auto;
+  display: block;
+  outline: none;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- back</a>
+    <div class="page-title">wellll....</div>
+
+
+    <div class="media-item">
+      <div class="media-title">08112026 today i learned to tell the difference between white noise and applause</div>
+      <audio controls>
+        <source src="./path/to/song.mp3" type="audio/mp3">
+      </audio>
+    </div>
+
+
+    <div class="media-item">
+      <div class="media-title">08102026 today i took a picture of the sky above bisbee, AZ</div>
+      <img src="./today%20images/heavensky.PNG" class="media-image">
+    </div>
+
+
+    <!--<div class="media-item">
+      <div class="media-title">video title here</div>
+        <video controls>
+         <source src="./path/to/video.mp4" type="video/mp4">
+  </video>
+</div> -->
+
+  </div>
+</body>
+</html>

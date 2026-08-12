@@ -2,10 +2,9 @@
 <html class="staticrypt-html">
     <head>
         <meta charset="utf-8" />
-        <title>epic page - protected</title>
+        <title>{{{title}}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- do not cache this page -->
         <meta http-equiv="cache-control" content="max-age=0" />
         <meta http-equiv="cache-control" content="no-cache" />
         <meta http-equiv="expires" content="0" />
@@ -19,7 +18,7 @@
                 box-sizing: border-box;
             }
 
-            .staticrypt-html, .staticrypt-body {
+            html, body {
                 height: 100%;
                 background-color: #f5f0eb;
                 font-family: Arial, Helvetica, sans-serif;
@@ -65,10 +64,6 @@
                 max-width: 320px;
             }
 
-            .staticrypt-form {
-                text-align: left;
-            }
-
             .staticrypt-instructions {
                 margin-bottom: 24px;
             }
@@ -100,7 +95,7 @@
                 background: transparent;
                 border: none;
                 border-bottom: 1px solid #ccc;
-                padding: 10px 30px 10px 0;
+                padding: 10px 0;
                 font-size: 13px;
                 font-weight: 300;
                 color: #2c2c2c;
@@ -108,25 +103,8 @@
                 transition: border-color 0.2s ease;
             }
 
-            .staticrypt-form input[type="password"]:focus,
-            .staticrypt-form input[type="text"]:focus {
+            .staticrypt-form input[type="password"]:focus {
                 border-bottom: 1px solid #2c2c2c;
-            }
-
-            .staticrypt-toggle-password-visibility {
-                cursor: pointer;
-                height: 16px;
-                opacity: 0.4;
-                position: absolute;
-                right: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 16px;
-                transition: opacity 0.2s ease;
-            }
-
-            .staticrypt-toggle-password-visibility:hover {
-                opacity: 0.8;
             }
 
             .staticrypt-form .staticrypt-decrypt-button {
@@ -146,19 +124,6 @@
             .staticrypt-form .staticrypt-decrypt-button:hover {
                 background: #2c2c2c;
                 color: #f5f0eb;
-            }
-
-            label.staticrypt-remember {
-                display: flex;
-                align-items: center;
-                margin-bottom: 20px;
-                font-size: 11px;
-                font-weight: 300;
-                color: #777;
-            }
-
-            .staticrypt-remember input[type="checkbox"] {
-                margin-right: 8px;
             }
 
             .hidden {
@@ -211,7 +176,7 @@
                 <div class="staticrypt-form">
                     <div class="staticrypt-instructions">
                         <div class="staticrypt-title">epic page</div>
-                        <div class="staticrypt-subtitle">enter password to view</div>
+                        <div class="staticrypt-subtitle">{{{instructions}}}</div>
                     </div>
 
                     <form id="staticrypt-form" action="#" method="post">
@@ -222,13 +187,6 @@
                                 name="password"
                                 placeholder="password"
                                 autofocus
-                            />
-
-                            <img
-                                class="staticrypt-toggle-password-visibility"
-                                alt="Show password"
-                                title="Show password"
-                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTM4LjggNS4xQzI4LjQtMy4xIDEzLjMtMS4yIDUuMSA5LjJTLTEuMiAzNC43IDkuMiA0Mi45bDU5MiA0NjRjMTAuNCA4LjIgMjUuNSA2LjMgMzMuNy00LjFzNi4zLTI1LjUtNC4xLTMzLjdMNTI1LjYgMzg2LjdjMzkuNi00MC42IDY2LjQtODYuMSA3OS45LTExOC40YzMuMy03LjkgMy43LTE2LjcgMC0yNC42Yy0xNC45LTM1LjctNDYuMi04Ny43LTkzLTEzMS4xQzQ2NS41IDY4LjggNDAwLjggMzIgMzIwIDMyYy02OC4yIDAtMTI1IDI2LjMtMTY5LjMgNjAuOEwzOC44IDUuMXpNMjIzLjEgMTQ5LjVDMjQ4LjYgMTI2LjIgMjgyLjcgMTEyIDMyMCAxMTJjNzkuNSAwIDE0NCA2NC41IDE0NCAxNDRjMCAyNC45LTYuMyA0OC4zLTE3LjQgNjguN0w0MDggMjk0LjVjOC40LTE5LjMgMTAuNi00MS40IDQuOC02My4zYy0x1MS4xLTQxLjUtNDcuOC02OS40LTg4LjYtNzEuMWMtNS44LS4yLTkuMiA2LjEtNy40IDExLjdjMi4xIDYuNCAzLjMgMTMuMiAzLjMgMjAuM2Mw IDEwLjItMi40IDE5LjgtNi42IDI4LjNsLTkwLjMtNzAuOHpNMzczIDM4OS45Yy0xNi40IDYuNS0zNC4zIDEwLjEtNTMgMTAuMWMtNzkuNSAwLTE0NC02NC41LTE0NC0xNDRjMC02LjkgLjUtMTMuNiAxLjQtMjAuMkw4My41IDE2MS41QzYwLjMgMTkxLjIgNDQgMjIwLjggMzQuNSAyNDMuN2MtMy4zIDcuOS0zLjMgMTYuNyAwIDI0LjZbMTQuOSAzNS43IDQ2LjIgODtuNyA5MyAxMzEuMUMxNzQuNSA0NDMuMiAyMzkuMiA0ODAgMzIwIDQ4MGM0Ny44IDAgODkuOS0xMi45IDEyNi4yLTMyLjVMMzczIDM4OS45eiIvPjwvc3ZnPg=="
                             />
                         </div>
 
@@ -244,7 +202,52 @@
         </div>
 
         <script>
-            // JS decrypted engine payload injected by StatiCrypt CLI during build...
+            // Placeholders required by StatiCrypt CLI v3
+            const templateError = "Bad password!";
+            const templateToggleAltShow = "Show password";
+            const templateToggleAltHide = "Hide password";
+            const isRememberEnabled = {{{is_remember_enabled}}};
+            const staticryptConfig = {{{staticrypt_config}}};
+
+            const templateConfig = {
+                rememberExpirationKey: "staticrypt_expiration",
+                rememberPassphraseKey: "staticrypt_passphrase",
+                replaceHtmlCallback: null,
+                clearLocalStorageCallback: null,
+            };
+
+            {{{js_staticrypt}}}
+
+            const staticrypt = staticryptInitiator.init(staticryptConfig, templateConfig);
+
+            window.onload = async function () {
+                const { isSuccessful } = await staticrypt.handleDecryptOnLoad();
+
+                if (!isSuccessful) {
+                    document.getElementById("staticrypt_loading").classList.add("hidden");
+                    document.getElementById("staticrypt_content").classList.remove("hidden");
+                    document.getElementById("staticrypt-password").focus();
+
+                    if (isRememberEnabled) {
+                        const rememberLabel = document.getElementById("staticrypt-remember-label");
+                        if (rememberLabel) rememberLabel.classList.remove("hidden");
+                    }
+                }
+            };
+
+            document.getElementById("staticrypt-form").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const password = document.getElementById("staticrypt-password").value;
+                const rememberEl = document.getElementById("staticrypt-remember");
+                const isRememberChecked = rememberEl ? rememberEl.checked : false;
+
+                const { isSuccessful } = await staticrypt.handleDecryptionOfPage(password, isRememberChecked);
+
+                if (!isSuccessful) {
+                    alert(templateError);
+                }
+            });
         </script>
     </body>
 </html>
